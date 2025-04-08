@@ -1,0 +1,40 @@
+{
+	"version": 1,
+	"processes": [
+		{
+			"name": "capsule_aind_analysis_job_dispatch_1",
+			"capsule": {
+				"id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187",
+				"name": "aind-analysis-job-dispatch",
+				"slug": "9303168",
+				"app_panel": true
+			},
+			"resources": {
+				"cpus": 1,
+				"memory": 8
+			}
+		},
+		{
+			"name": "capsule_aind_analysis_wrapper_2",
+			"capsule": {
+				"id": "ccdad30f-85a3-4c04-b24d-33fdbff8297c",
+				"name": "aind-analysis-wrapper",
+				"slug": "7525633",
+				"app_panel": true
+			},
+			"resources": {
+				"cpus": 1,
+				"memory": 8
+			},
+			"inputs": [
+				{
+					"id": "wq4MUBLhDuIsZLdU",
+					"source_id": "capsule_aind_analysis_job_dispatch_1",
+					"type": "capsule",
+					"name": "aind-analysis-job-dispatch",
+					"flatten": true
+				}
+			]
+		}
+	]
+}
