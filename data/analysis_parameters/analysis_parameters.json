@@ -1,0 +1,14 @@
+[
+    {
+        
+        "analysis_name": "Unit Yield",
+        "analysis_version": "v0.0.5",
+        "analysis_libraries": [
+            "aind-ephys-utils"
+        ],
+        "analysis_parameters": {
+            "isi_violations": 0.5
+        },
+        "s3_output_bucket": "aind-scratch-data/arjun.sridhar"
+    }
+]

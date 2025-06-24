@@ -12,7 +12,17 @@
 			"resources": {
 				"cpus": 1,
 				"memory": 8
-			}
+			},
+			"inputs": [
+				{
+					"id": "tfG2qIDVLCGLLlKB",
+					"source_id": "data/analysis_data_asset_ids",
+					"type": "pipeline",
+					"name": "analysis_data_asset_ids",
+					"source_path": "analysis_data_asset_ids/",
+					"collect": true
+				}
+			]
 		},
 		{
 			"name": "capsule_aind_analysis_wrapper_2",
@@ -32,9 +42,21 @@
 					"source_id": "capsule_aind_analysis_job_dispatch_1",
 					"type": "capsule",
 					"name": "aind-analysis-job-dispatch",
+					"target_path": "job_dict",
 					"flatten": true
+				},
+				{
+					"id": "AVHCTm0H8xITcbKE",
+					"source_id": "data/analysis_parameters",
+					"type": "pipeline",
+					"name": "analysis_parameters",
+					"source_path": "analysis_parameters/",
+					"collect": true
 				}
-			]
+			],
+			"results": {
+				"id": "ccdad30f-85a3-4c04-b24d-33fdbff8297c"
+			}
 		}
 	]
 }

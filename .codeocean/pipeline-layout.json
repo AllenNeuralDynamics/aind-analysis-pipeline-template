@@ -2,8 +2,26 @@
 	"edges": [
 		{
 			"id": "xy-edge__capsule_aind_analysis_job_dispatch_1-capsule_aind_analysis_wrapper_2",
+			"selected": false,
 			"source": "capsule_aind_analysis_job_dispatch_1",
 			"target": "capsule_aind_analysis_wrapper_2"
+		},
+		{
+			"id": "xy-edge__capsule_aind_analysis_wrapper_2-results",
+			"selected": false,
+			"source": "capsule_aind_analysis_wrapper_2",
+			"target": "results"
+		},
+		{
+			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_2",
+			"selected": false,
+			"source": "data/analysis_parameters",
+			"target": "capsule_aind_analysis_wrapper_2"
+		},
+		{
+			"id": "xy-edge__data/analysis_data_asset_ids-capsule_aind_analysis_job_dispatch_1",
+			"source": "data/analysis_data_asset_ids",
+			"target": "capsule_aind_analysis_job_dispatch_1"
 		}
 	],
 	"nodes": [
@@ -13,17 +31,19 @@
 			},
 			"id": "capsule_aind_analysis_job_dispatch_1",
 			"position": {
-				"x": 735,
-				"y": 180
+				"x": 956.3333333333333,
+				"y": 129.33333333333334
 			},
+			"selected": false,
 			"type": "capsule"
 		},
 		{
 			"id": "results",
 			"position": {
-				"x": 855,
-				"y": 580
+				"x": 893.6666666666667,
+				"y": 786.6666666666666
 			},
+			"selected": false,
 			"type": "results"
 		},
 		{
@@ -36,12 +56,29 @@
 				"y": 525
 			},
 			"type": "capsule"
+		},
+		{
+			"id": "data/analysis_parameters",
+			"position": {
+				"x": 315,
+				"y": -170.33333333333334
+			},
+			"selected": false,
+			"type": "pipeline"
+		},
+		{
+			"id": "data/analysis_data_asset_ids",
+			"position": {
+				"x": 1110,
+				"y": -75
+			},
+			"type": "pipeline"
 		}
 	],
-	"timestamp": 1743203065572,
+	"timestamp": 1750267948976,
 	"viewport": {
-		"x": 0,
-		"y": 0,
-		"zoom": 0.75
+		"x": 88.69173201297372,
+		"y": 290.48212346704804,
+		"zoom": 0.6597539553864471
 	}
 }
