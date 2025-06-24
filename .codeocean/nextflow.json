@@ -27,10 +27,9 @@
 		{
 			"name": "capsule_aind_analysis_wrapper_2",
 			"capsule": {
-				"id": "ccdad30f-85a3-4c04-b24d-33fdbff8297c",
+				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
 				"name": "aind-analysis-wrapper",
-				"slug": "7525633",
-				"app_panel": true
+				"slug": "7739912"
 			},
 			"resources": {
 				"cpus": 1,
@@ -38,24 +37,21 @@
 			},
 			"inputs": [
 				{
-					"id": "wq4MUBLhDuIsZLdU",
+					"id": "emH1AEFzOdHv5Ilq",
 					"source_id": "capsule_aind_analysis_job_dispatch_1",
 					"type": "capsule",
-					"name": "aind-analysis-job-dispatch",
-					"target_path": "job_dict",
-					"flatten": true
+					"name": "aind-analysis-job-dispatch"
 				},
 				{
-					"id": "AVHCTm0H8xITcbKE",
+					"id": "Kz9r8hnrTLUgQ1nc",
 					"source_id": "data/analysis_parameters",
 					"type": "pipeline",
 					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/",
-					"collect": true
+					"source_path": "analysis_parameters/"
 				}
 			],
 			"results": {
-				"id": "ccdad30f-85a3-4c04-b24d-33fdbff8297c"
+				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
 			}
 		}
 	]

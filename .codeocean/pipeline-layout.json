@@ -1,27 +1,24 @@
 {
 	"edges": [
 		{
+			"id": "xy-edge__data/analysis_data_asset_ids-capsule_aind_analysis_job_dispatch_1",
+			"source": "data/analysis_data_asset_ids",
+			"target": "capsule_aind_analysis_job_dispatch_1"
+		},
+		{
+			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_2",
+			"source": "data/analysis_parameters",
+			"target": "capsule_aind_analysis_wrapper_2"
+		},
+		{
 			"id": "xy-edge__capsule_aind_analysis_job_dispatch_1-capsule_aind_analysis_wrapper_2",
-			"selected": false,
 			"source": "capsule_aind_analysis_job_dispatch_1",
 			"target": "capsule_aind_analysis_wrapper_2"
 		},
 		{
 			"id": "xy-edge__capsule_aind_analysis_wrapper_2-results",
-			"selected": false,
 			"source": "capsule_aind_analysis_wrapper_2",
 			"target": "results"
-		},
-		{
-			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_2",
-			"selected": false,
-			"source": "data/analysis_parameters",
-			"target": "capsule_aind_analysis_wrapper_2"
-		},
-		{
-			"id": "xy-edge__data/analysis_data_asset_ids-capsule_aind_analysis_job_dispatch_1",
-			"source": "data/analysis_data_asset_ids",
-			"target": "capsule_aind_analysis_job_dispatch_1"
 		}
 	],
 	"nodes": [
@@ -47,17 +44,6 @@
 			"type": "results"
 		},
 		{
-			"data": {
-				"capsule_id": "ccdad30f-85a3-4c04-b24d-33fdbff8297c"
-			},
-			"id": "capsule_aind_analysis_wrapper_2",
-			"position": {
-				"x": 660,
-				"y": 525
-			},
-			"type": "capsule"
-		},
-		{
 			"id": "data/analysis_parameters",
 			"position": {
 				"x": 315,
@@ -73,12 +59,23 @@
 				"y": -75
 			},
 			"type": "pipeline"
+		},
+		{
+			"data": {
+				"capsule_id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
+			},
+			"id": "capsule_aind_analysis_wrapper_2",
+			"position": {
+				"x": 870,
+				"y": 495
+			},
+			"type": "capsule"
 		}
 	],
-	"timestamp": 1750267948976,
+	"timestamp": 1750805529294,
 	"viewport": {
-		"x": 88.69173201297372,
-		"y": 290.48212346704804,
+		"x": -8.308267987026284,
+		"y": 220.48212346704798,
 		"zoom": 0.6597539553864471
 	}
 }
