@@ -7,11 +7,13 @@
 		},
 		{
 			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_2",
+			"selected": true,
 			"source": "data/analysis_parameters",
 			"target": "capsule_aind_analysis_wrapper_2"
 		},
 		{
 			"id": "xy-edge__capsule_aind_analysis_job_dispatch_1-capsule_aind_analysis_wrapper_2",
+			"selected": false,
 			"source": "capsule_aind_analysis_job_dispatch_1",
 			"target": "capsule_aind_analysis_wrapper_2"
 		},
@@ -19,6 +21,11 @@
 			"id": "xy-edge__capsule_aind_analysis_wrapper_2-results",
 			"source": "capsule_aind_analysis_wrapper_2",
 			"target": "results"
+		},
+		{
+			"id": "xy-edge__data/analysis_query-capsule_aind_analysis_job_dispatch_1",
+			"source": "data/analysis_query",
+			"target": "capsule_aind_analysis_job_dispatch_1"
 		}
 	],
 	"nodes": [
@@ -70,12 +77,20 @@
 				"y": 495
 			},
 			"type": "capsule"
+		},
+		{
+			"id": "data/analysis_query",
+			"position": {
+				"x": 885,
+				"y": -195
+			},
+			"type": "pipeline"
 		}
 	],
-	"timestamp": 1750805529294,
+	"timestamp": 1750814669491,
 	"viewport": {
-		"x": -8.308267987026284,
-		"y": 220.48212346704798,
+		"x": 194.69173201297372,
+		"y": 289.482123467048,
 		"zoom": 0.6597539553864471
 	}
 }
