@@ -1,12 +1,11 @@
 #!/usr/bin/env nextflow
-// hash:sha256:91319a5f446841c27113c22db11d270268480f8344245a75da03e4520de2a339
+// hash:sha256:4654e383ee3b65b802dac78bcb08882a1c64ec30f58b6ee8db27965106b56b5a
 
 nextflow.enable.dsl = 1
 
 analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query", type: 'any')
-analysis_data_asset_ids_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_data_asset_ids", type: 'any')
-analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
-capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4 = channel.create()
+analysis_parameters_to_aind_analysis_wrapper_2 = channel.fromPath("../data/analysis_parameters", type: 'any')
+capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_3 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
 process capsule_aind_analysis_job_dispatch_1 {
@@ -20,10 +19,9 @@ process capsule_aind_analysis_job_dispatch_1 {
 
 	input:
 	path 'capsule/data' from analysis_query_to_aind_analysis_job_dispatch_1.collect()
-	path 'capsule/data' from analysis_data_asset_ids_to_aind_analysis_job_dispatch_2.collect()
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_3
 
 	script:
 	"""
@@ -70,8 +68,8 @@ process capsule_aind_analysis_wrapper_2 {
 	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
 
 	input:
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_3.collect()
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4.flatten()
+	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_2.collect()
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_3.flatten()
 
 	output:
 	path 'capsule/results/*'

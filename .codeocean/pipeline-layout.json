@@ -1,13 +1,8 @@
 {
 	"edges": [
 		{
-			"id": "xy-edge__data/analysis_data_asset_ids-capsule_aind_analysis_job_dispatch_1",
-			"source": "data/analysis_data_asset_ids",
-			"target": "capsule_aind_analysis_job_dispatch_1"
-		},
-		{
 			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_2",
-			"selected": true,
+			"selected": false,
 			"source": "data/analysis_parameters",
 			"target": "capsule_aind_analysis_wrapper_2"
 		},
@@ -87,10 +82,10 @@
 			"type": "pipeline"
 		}
 	],
-	"timestamp": 1750814669491,
+	"timestamp": 1750873479120,
 	"viewport": {
-		"x": 194.69173201297372,
-		"y": 289.482123467048,
-		"zoom": 0.6597539553864471
+		"x": -726.1817165059495,
+		"y": 244.65486910855896,
+		"zoom": 1.2389267473663277
 	}
 }

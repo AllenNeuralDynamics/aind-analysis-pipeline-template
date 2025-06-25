@@ -21,14 +21,6 @@
 					"name": "analysis_query",
 					"source_path": "analysis_query/",
 					"collect": true
-				},
-				{
-					"id": "tfG2qIDVLCGLLlKB",
-					"source_id": "data/analysis_data_asset_ids",
-					"type": "pipeline",
-					"name": "analysis_data_asset_ids",
-					"source_path": "analysis_data_asset_ids/",
-					"collect": true
 				}
 			]
 		},
