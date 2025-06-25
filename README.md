@@ -3,7 +3,17 @@
 This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. First, duplicate the pipeline. The pipeline has 2 capsules:
 
 ### Job Dispatcher
-The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Users can either specify a docdb query (in a json file or pasted into the app panel). The minimal output model is shown below for a record returned from the query. Each record will be saved to its own result folder to parallelize downstream analysis:
+The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments are below:
+
+| Argument               | Type    | Description                                                                                                                                             |
+|------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--query`  | string | The dictionary filter to query the document database or the path to a json containing the query.
+| `--file_extension`      | string  | The file extension to search for from the bucket returned by the query. Defualt is empty                                                                                                             |
+| `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
+| `--num_parallel_workers`    | int  |  The number of parallel workers to output, default is 50
+| `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data` folder called `data_asset_input.csv`, with the column `asset_id`.
+
+Users can either specify a docdb query (in a json file or pasted into the app panel). The minimal output model is shown below for a record returned from the query. Each record will be saved to its own result folder to parallelize downstream analysis:
 
 ```json
 {
@@ -39,7 +49,7 @@ In addition, users can specify a file extension to look for as an input argument
 }
 ```
 
-There is an alternative method for specifying data input. Users can specify a csv with a column `asset_id` which the pipeline will use, when the input argument `use_data_asset_csv` is set to value **1**.
+There is an alternative method for specifying data input. Users can specify a csv with a column `asset_id` which the pipeline will use and will override the query field, when the input argument `use_data_asset_csv` is set to value **1**.
 
 If you need to group data assets, see the portion in the code where you can specify your own grouping however you like.
 
