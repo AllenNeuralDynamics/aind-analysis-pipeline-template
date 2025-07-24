@@ -22,7 +22,7 @@ The pipeline consists of two main components that work together via Nextflow:
 
 ### 1. Job Dispatcher
 
-The [Job Dispatcher capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree) handles data discovery and preparation. It queries the document database to find data assets matching your criteria and prepares them for parallel processing. It will also find all analysis parameters to run on each asset as defined in the `distributed_parameters.json`
+The [Job Dispatcher capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree) handles data discovery and preparation. It queries the document database to find data assets matching your criteria and prepares them for parallel processing. It will also find all analysis parameters to run on each asset as defined in the `analysis_parameters.json` file located in `/data/analysis_parameters/`.
 
 #### Configuration Options
 
@@ -44,31 +44,7 @@ Each discovered data asset produces a JSON record with the following structure:
     "s3_location": ["s3://bucket/data-asset-id"],
     "asset_id": ["data-asset-id"],
     "asset_name": ["descriptive-name"],
-    "distributed_parameters": [
-        {
-            "analysis_name": "foo",
-            "analysis_value": 10.0,
-            "analysis_version": 1.0
-        }
-    ],
     "file_location": []
-}
-```
-
-**With file extension specified:**
-```json
-{
-    "s3_location": ["s3://bucket/data-asset-id"],
-    "asset_id": ["data-asset-id"], 
-    "asset_name": ["descriptive-name"],
-    "distributed_parameters": [
-        {
-            "analysis_name": "foo",
-            "analysis_value": 10.0,
-            "analysis_version": 1.0
-        }
-    ],
-    "file_location": ["s3://bucket/data-asset-id/path/to/file.ext"]
 }
 ```
 
@@ -115,17 +91,44 @@ a52edfb8-0f42-4ad4-899d-1801e9a550ae
 
 ### 1. Define Analysis Parameters
 
-Edit `data/analysis_parameters/distributed_parameters.json` with your analysis configuration:
+Edit `data/analysis_parameters/analysis_parameters.json` with your analysis configuration. This file should contain one of two mutually exclusive keys:
 
+- **`analysis_parameter`**: Use when running the same analysis parameters on all data assets (N assets → N jobs)
+- **`distributed_parameters`**: Use when running multiple different analyses (N assets × M parameters → N×M jobs). When present, `analysis_parameter` is ignored.
+
+**Example for single analysis:**
 ```json
-[
-    {
+{
+    "analysis_parameter": {
         "analysis_name": "Your Analysis Name",
         "analysis_tag": "Version or description",
-        "custom_parameter": "your_value"
+        "custom_parameter": "shared_value",
+        "threshold": 0.05
     }
-]
+}
 ```
+
+**Example for distributed analysis:**
+```json
+{
+    "distributed_parameters": [
+        {
+            "analysis_name": "Your Analysis Name",
+            "analysis_tag": "variant_1",
+            "custom_parameter": "value_1",
+            "threshold": 0.03
+        },
+        {
+            "analysis_name": "Your Analysis Name", 
+            "analysis_tag": "variant_2",
+            "custom_parameter": "value_2", 
+            "threshold": 0.07
+        }
+    ]
+}
+```
+
+Each dictionary must follow the complete `AnalysisSpecification` schema defined in your analysis wrapper.
 
 ### 2. Implement Analysis Logic
 
@@ -135,49 +138,3 @@ In the Analysis Wrapper capsule:
 2. **Define your analysis schema** in `analysis_wrapper/analysis_model.py`
 3. **Implement your analysis code** in the appropriate module
 4. **Test with sample data**
-
-## Advanced Configuration
-
-### File Grouping
-
-For analyses requiring multiple files per job, set `--split_files=0`. You can implement custom grouping logic in the Job Dispatcher code.
-
-### Resource Management
-
-Adjust parallel processing limits in `pipeline/nextflow.config`:
-
-```groovy
-process {
-    maxForks = 50
-    queueSize = 50
-}
-```
-
-### Output Management
-
-Results are automatically:
-- Saved to `/results/` in Code Ocean
-- Uploaded to S3 (path configured via environment variables)
-- Registered in the document database with full provenance
-
-## Environment Variables
-
-Required environment variables (typically set automatically in Code Ocean):
-- `CO_COMPUTATION_ID`: Computation identifier
-- `AWS_DEFAULT_REGION`: AWS region (default: us-west-2)
-
-See the [Analysis Wrapper documentation](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) for additional S3 and database configuration options.
-
-## Troubleshooting
-
-### Common Issues
-
-1. **No data assets found**: Check your query syntax and ensure data exists in the database
-2. **Analysis fails**: Verify your analysis parameters schema matches your implementation
-3. **Resource limits**: Adjust `maxForks` and `queueSize` in nextflow.config if jobs are queuing
-
-### Getting Help
-
-- Review the [Analysis Wrapper documentation](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper)
-- Check Code Ocean logs for detailed error messages
-- Verify your analysis works with sample data before scaling up 
