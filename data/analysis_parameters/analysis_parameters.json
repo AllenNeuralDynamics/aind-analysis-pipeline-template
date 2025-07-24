@@ -1,6 +1,14 @@
 {
-    
-    "analysis_name": "Unit Filtering",
-    "analysis_tag": "Arjun's filtering",
-    "isi_violations_cutoff": 0.03
+    "distributed_parameters": [
+        {
+            "analysis_name": "Unit Filtering",
+            "analysis_tag": "Arjun's filtering - strict",
+            "isi_violations_cutoff": 0.03
+        },
+        {
+            "analysis_name": "Unit Filtering",
+            "analysis_tag": "Arjun's filtering - lenient",
+            "isi_violations_cutoff": 0.05
+        }
+    ]
 }
