@@ -21,6 +21,11 @@
 			"id": "xy-edge__data/analysis_query-capsule_aind_analysis_job_dispatch_1",
 			"source": "data/analysis_query",
 			"target": "capsule_aind_analysis_job_dispatch_1"
+		},
+		{
+			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_job_dispatch_1",
+			"source": "data/analysis_parameters",
+			"target": "capsule_aind_analysis_job_dispatch_1"
 		}
 	],
 	"nodes": [
@@ -51,7 +56,7 @@
 				"x": 315,
 				"y": -170.33333333333334
 			},
-			"selected": false,
+			"selected": true,
 			"type": "pipeline"
 		},
 		{
@@ -82,10 +87,10 @@
 			"type": "pipeline"
 		}
 	],
-	"timestamp": 1750873479120,
+	"timestamp": 1753903070454,
 	"viewport": {
-		"x": -726.1817165059495,
-		"y": 244.65486910855896,
-		"zoom": 1.2389267473663277
+		"x": -147.5905058630177,
+		"y": 321.0659991724207,
+		"zoom": 0.5524254274090472
 	}
 }

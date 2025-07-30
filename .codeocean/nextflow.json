@@ -15,6 +15,13 @@
 			},
 			"inputs": [
 				{
+					"id": "kLmZ2iB3gcFlyRWr",
+					"source_id": "data/analysis_parameters",
+					"type": "pipeline",
+					"name": "analysis_parameters",
+					"source_path": "analysis_parameters/"
+				},
+				{
 					"id": "NocXuHpDs5ALjZQv",
 					"source_id": "data/analysis_query",
 					"type": "pipeline",
