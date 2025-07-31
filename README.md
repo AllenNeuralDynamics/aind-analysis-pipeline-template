@@ -1,61 +1,140 @@
-# aind-analysis-pipeline-template
+# AIND Analysis Pipeline Template
 
-This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. First, duplicate the pipeline. The pipeline has 2 capsules:
+## Overview
 
-### Job Dispatcher
-The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments are below:
+This [pipeline template](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) provides a scalable framework for running large-scale analyses on neural data stored in the AIND ecosystem. The pipeline uses a two-stage approach: data discovery and parallel analysis execution.
 
-| Argument               | Type    | Description                                                                                                                                             |
-|------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--query`  | string | The dictionary filter to query the document database or the path to a json containing the query.
-| `--file_extension`      | string  | The file extension to search for from the bucket returned by the query. Defualt is empty                                                                                                             |
-| `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
-| `--num_parallel_workers`    | int  |  The number of parallel workers to output, default is 50
-| `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data` folder called `data_asset_input.csv`, with the column `asset_id`.
+## Architecture
 
-Users can either specify a docdb query (in a json file or pasted into the app panel). The minimal output model is shown below for a record returned from the query. Each record will be saved to its own result folder to parallelize downstream analysis:
+The pipeline consists of two main components that work together via Nextflow:
+
+1. **Job Dispatcher**: Discovers and prepares data assets for analysis
+2. **Analysis Wrapper**: Executes user-defined analysis on each data asset in parallel
+
+## Quick Start
+
+1. **Duplicate this pipeline** in Code Ocean
+2. **Configure your data input** (see [Data Input Methods](#data-input-methods))
+3. **Set up your analysis** (see [Analysis Configuration](#analysis-configuration))
+4. **Run the pipeline**
+
+## Pipeline Components
+
+### 1. Job Dispatcher
+
+The [Job Dispatcher capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree) handles data discovery and preparation. It queries the document database to find data assets matching your criteria and prepares them for parallel processing. It will also find all analysis parameters to run on each asset as defined in the `analysis_parameters.json` file located in `/data/analysis_parameters/`.
+
+#### Configuration Options
+
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| `--query` | string | - | MongoDB query filter (as dictionary string) or path to JSON file containing the query |
+| `--file_extension` | string | "" | Specific file extension to search for within each data asset |
+| `--split_files` | int | 1 | Whether to split multiple files into separate jobs (1) or group them together (0) |
+| `--num_parallel_workers` | int | 50 | Maximum number of parallel analysis jobs to create |
+| `--use_data_asset_csv` | int | 0 | Use CSV file instead of database query (1=yes, 0=no) |
+
+#### Output Format
+
+Each discovered data asset produces a JSON record with the following structure:
+
+**Basic output (no file extension specified):**
+```json
+{
+    "s3_location": ["s3://bucket/data-asset-id"],
+    "asset_id": ["data-asset-id"],
+    "asset_name": ["descriptive-name"],
+    "file_location": []
+}
+```
+
+### 2. Analysis Wrapper
+
+The [Analysis Wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) executes your custom analysis code on each data asset in parallel.
+
+Key features:
+- Receives data asset information from the Job Dispatcher
+- Downloads data from S3 locations
+- Runs user-defined analysis code
+- Uploads results to S3
+- Records metadata in the document database
+
+## Data Input Methods
+
+### Method 1: Database Query (Recommended)
+
+Create a JSON file in `data/analysis_query/input_query.json` with your MongoDB query:
 
 ```json
 {
-    "s3_location": [
-        "s3://codeocean-s3datasetsbucket-1u41qdg42ur9/50fa9416-4e21-482f-8901-889322a87ae3"
-    ],
-    "asset_id": [
-        "50fa9416-4e21-482f-8901-889322a87ae3"
-    ],
-    "asset_name": [
-        "behavior_774659_2025-06-07_14-31-15_processed_2025-06-08_03-49-49"
-    ],
-    "file_location": [
+    "subject.subject_id": "774659",
+    "data_description.process_name": "processed"
+}
+```
+
+### Method 2: CSV Asset List
+
+For predefined lists of data assets:
+
+1. Set `--use_data_asset_csv=1`
+2. Create `data/analysis_data_asset_ids/data_asset_input.csv`:
+
+```csv
+asset_id
+d94ab360-f393-41f4-831f-e098f11803df
+a52edfb8-0f42-4ad4-899d-1801e9a550ae
+```
+
+> **Note**: CSV method overrides the database query when enabled.
+
+## Analysis Configuration
+
+### 1. Define Analysis Parameters
+
+Edit `data/analysis_parameters/analysis_parameters.json` with your analysis configuration. This file should contain one of two mutually exclusive keys:
+
+- **`analysis_parameter`**: Use when running the same analysis parameters on all data assets (N assets → N jobs)
+- **`distributed_parameters`**: Use when running multiple different analyses (N assets × M parameters → N×M jobs). When present, `analysis_parameter` is ignored.
+
+**Example for single analysis:**
+```json
+{
+    "analysis_parameter": {
+        "analysis_name": "Your Analysis Name",
+        "analysis_tag": "Version or description",
+        "custom_parameter": "shared_value",
+        "threshold": 0.05
+    }
+}
+```
+
+**Example for distributed analysis:**
+```json
+{
+    "distributed_parameters": [
+        {
+            "analysis_name": "Your Analysis Name",
+            "analysis_tag": "variant_1",
+            "custom_parameter": "value_1",
+            "threshold": 0.03
+        },
+        {
+            "analysis_name": "Your Analysis Name", 
+            "analysis_tag": "variant_2",
+            "custom_parameter": "value_2", 
+            "threshold": 0.07
+        }
     ]
 }
 ```
 
-In addition, users can specify a file extension to look for as an input argument. An example output is shown below 
-```json
-{
-    "s3_location": [
-        "s3://codeocean-s3datasetsbucket-1u41qdg42ur9/50fa9416-4e21-482f-8901-889322a87ae3"
-    ],
-    "asset_id": [
-        "50fa9416-4e21-482f-8901-889322a87ae3"
-    ],
-    "asset_name": [
-        "behavior_774659_2025-06-07_14-31-15_processed_2025-06-08_03-49-49"
-    ],
-    "file_location": [
-        "s3://codeocean-s3datasetsbucket-1u41qdg42ur9/50fa9416-4e21-482f-8901-889322a87ae3/nwb/behavior_774659_2025-06-07_14-31-15.nwb"
-    ]
-}
-```
+Each dictionary must follow the complete `AnalysisSpecification` schema defined in your analysis wrapper.
 
-There is an alternative method for specifying data input. Users can specify a csv with a column `asset_id` which the pipeline will use and will override the query field, when the input argument `use_data_asset_csv` is set to value **1**.
+### 2. Implement Analysis Logic
 
-If you need to group data assets, see the portion in the code where you can specify your own grouping however you like.
+In the Analysis Wrapper capsule:
 
-### Analysis Wrapper
-The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) is the capsule where analysis is to be executed. First, duplicate this capsule.
-
-In this capsule, users must provide their own analysis schema before running. First, it must be defined in `analysis_wrapper/example_analysis_model.py`. Then, create a json that follows this and replace the existing analysis parameters json in the pipeline with the one you defined (keep the name the same). 
-
-The wrapper will then use the output from the dispatcher (parallelized across records returned from the dispatcher), and will then run the user defined analysis. Once analysis is complete, the output folder (`/results/` in Code Ocean) will be copied to the S3 location specified, and a metadata record will be written to the document database containing the input data, analysis model, and output location. See the [readme](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) for more details about setting the output S3 path and other necessary environment variables. 
+1. **Duplicate the Analysis Wrapper capsule**
+2. **Define your analysis schema** in `analysis_wrapper/analysis_model.py`
+3. **Implement your analysis code** in the appropriate module
+4. **Test with sample data**
