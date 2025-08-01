@@ -1,6 +1,15 @@
 {
-    
-    "analysis_name": "Unit Filtering",
-    "analysis_tag": "Arjun's filtering",
-    "isi_violations_cutoff": 0.03
+    "fixed_parameters": {
+        "analysis_name": "Unit Quality Filtering",
+        "analysis_tag": "baseline_v1.0",
+        "isi_violations_cutoff": 0.05
+    },
+    "distributed_parameters": [
+        {
+            "method": "isolation_distance"
+        },
+        {
+            "method": "amplitude_cutoff"
+        }
+    ]
 }
