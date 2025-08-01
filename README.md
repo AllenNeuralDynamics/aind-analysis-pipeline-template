@@ -14,8 +14,12 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/930
 | `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data/analysis_data_asset_ids` folder called `data_asset_input.csv`, with the column `asset_id`. **Be sure to then replace the connection to the analysis_query and set it to connect to the analysis_data_asset_ids**
 | `--group_by`  | int | Group asset query by a given field in the database schema (for example, by `subject_id`)
 
+See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) for more details.
+
 ### Analysis Wrapper
 The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) is the capsule where analysis is to be executed. **Users must duplicate this capsule before running the pipeline and be sure to swap out the current one with duplicated one. The current capsule is meant to be an example**.
+
+User defined analysis can be specified in the **`run_analysis`** function in `run_capsule.py`. **If there was no file extension specified when dispatching, change example in line 30 to s3_location. Then users will need to read from the s3 bucket directly**.
 
 ### Analysis Wrapper - User Defined Analysis Parameters
 To help faciliate tracking of analysis parameters, a user should define their own pydantic model in the **analysis wrapper**. Follow steps below:
@@ -26,8 +30,8 @@ To help faciliate tracking of analysis parameters, a user should define their ow
 
 ### Analysis Pipeline Input 
 The main file that needs to be modified is `/data/analysis_parameters/analysis_parameters.json`. Sumary of key points is below:
-* Here, there are 2 keys **fixed_parameters**, and **distributed_parameters**.
-* Distributed parameters are **optional** and any parameters that will be used when dispatching. A product of parameters x input data will be computed in the dispatcher.
+* There are 2 keys **fixed_parameters**, and **distributed_parameters**.
+* Distributed parameters are **optional** and any parameters that will be used when dispatching. A product of distributed parameters x input data will be computed in the dispatcher.
 * Fixed parameters are constant for the specified analysis and should be specified to help track.
 * These parameters will then be automatically merged in the analysis wrapper. **Make sure the combination matches with the pydantic model defined in the analysis wrapper**. Example shown below
 
@@ -72,7 +76,7 @@ class UnitFilteringModel:
 
 Currently, users can also specify fixed parameters using the app panel and command line in the **analysis wrapper**. If these are specified, they will get merged in the wrapper automatically. **Again, be sure the combination of these matches the model defined**.
 
-See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) for more details.
+See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) for more details on enviornment setup, etc.
 
 ### Reporting Issues
 Utility functions that users do not need to modify are defined in this package here [analysis_pipeline_utils](https://github.com/AllenNeuralDynamics/analysis-pipeline-utils). Report issues there if there are bugs with any functions from the package.
