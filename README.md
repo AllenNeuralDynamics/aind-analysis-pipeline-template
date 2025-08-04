@@ -7,7 +7,7 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) 
 1. Duplicate the pipeline
 2. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
 3. Modfiy the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to committ all changes**. [Analysis Wrapper Section](#analysis-wrapper)
-4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expect dispatch. [Analysis Pipeline Input](#analysis-pipeline-input)
+4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
 5. Run the pipeline
 
 ### Job Dispatcher
