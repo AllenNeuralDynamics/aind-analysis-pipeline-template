@@ -4,11 +4,12 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) 
 [Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper)
 
 ### Recommended Workflow
-1. Duplicate the pipeline
-2. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
-3. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
-4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
-5. Run the pipeline
+1. Set up analysis collection in document database and S3 bucket. Reach out to data infrastructure team for this
+2. Duplicate the pipeline
+3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
+4. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
+5. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
+6. Run the pipeline
 
 ### Job Dispatcher
 The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
