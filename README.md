@@ -1,9 +1,17 @@
 # aind-analysis-pipeline-template
 
 This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. First, duplicate the pipeline. The pipeline has 2 capsules:
+[Job Dispatcher](job-dispatcher) and [Analysis Wrapper](analysis-wrapper)
+
+### Recommended Workflow
+1. Duplicate the pipeline
+2. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
+3. Modfiy the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to committ all changes**. [Analysis Wrapper Section](analysis-wrapper)
+4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expect dispatch. [Analysis Pipeline Input](analysis-pipeline-input)
+5. Run the pipeline
 
 ### Job Dispatcher
-The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app builder are below:
+The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
 
 | Argument               | Type    | Description                                                                                                                                             |
 |------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -14,26 +22,19 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/930
 | `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data/analysis_data_asset_ids` folder called `data_asset_input.csv`, with the column `asset_id`. **Be sure to then replace the connection to the analysis_query and set it to connect to the analysis_data_asset_ids**
 | `--group_by`  | int | Group asset query by a given field in the database schema (for example, by `subject_id`)
 
-See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) for more details.
+See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) readme for more details.
 
 ### Analysis Wrapper
-The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) is the capsule where analysis is to be executed. **Users must duplicate this capsule before running the pipeline and be sure to swap out the current one with duplicated one. The current capsule is meant to be an example**.
+The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) is the capsule where analysis is to be executed. **Users must first duplicate this capsule before running the pipeline and be sure to swap out the current one with duplicated one. The current capsule is meant to be an example**. 
 
-User defined analysis can be specified in the **`run_analysis`** function in `run_capsule.py`. **If there was no file extension specified when dispatching, change example in line 30 to s3_location. Then users will need to read from the s3 bucket directly**.
-
-### Analysis Wrapper - User Defined Analysis Parameters
-To help faciliate tracking of analysis parameters, a user should define their own pydantic model in the **analysis wrapper**. Follow steps below:
-1. In the file `/code/example_analysis_model.py`, first rename this to user's own model.
-2. Then add any fields that need to be kept track of. ***Recommeneded to add a field to tag the version run***.
-3. Additionally, for any numerical outputs - define these in the output model.
-4. Once this is done, be sure to change lines **9, 38 66, and 69** to the user defined model, and user defined output model respectively.
+See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) readme for **critical** details on enviornment setup, defining an analysis model, etc.
 
 ### Analysis Pipeline Input 
-The main file that needs to be modified is `/data/analysis_parameters/analysis_parameters.json`. Sumary of key points is below:
+The main file that needs to be modified is `/data/analysis_parameters/analysis_parameters.json`. Summary of key points is below:
 * There are 2 keys **fixed_parameters**, and **distributed_parameters**.
 * Distributed parameters are **optional** and any parameters that will be used when dispatching. A product of distributed parameters x input data will be computed in the dispatcher.
 * Fixed parameters are constant for the specified analysis and should be specified to help track.
-* These parameters will then be automatically merged in the analysis wrapper. **Make sure the combination matches with the pydantic model defined in the analysis wrapper**. Example shown below
+* The distributed and fixed parameters will then be automatically merged in the analysis wrapper. **Make sure the combination matches with the pydantic model defined in the analysis wrapper (See readme of analysis wrapper for more information)**. Example shown below
 
 ```json
 {
@@ -76,7 +77,6 @@ class UnitFilteringModel:
 
 Currently, users can also specify fixed parameters using the app panel and command line in the **analysis wrapper**. If these are specified, they will get merged in the wrapper automatically. **Again, be sure the combination of these matches the model defined**.
 
-See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) for more details on enviornment setup, etc.
 
 ### Reporting Issues
 Utility functions that users do not need to modify are defined in this package here [analysis_pipeline_utils](https://github.com/AllenNeuralDynamics/analysis-pipeline-utils). Report issues there if there are bugs with any functions from the package.
