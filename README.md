@@ -1,13 +1,13 @@
 # aind-analysis-pipeline-template
 
 This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. First, duplicate the pipeline. The pipeline has 2 capsules:
-[Job Dispatcher](job-dispatcher) and [Analysis Wrapper](analysis-wrapper)
+[Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper)
 
 ### Recommended Workflow
 1. Duplicate the pipeline
 2. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
-3. Modfiy the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to committ all changes**. [Analysis Wrapper Section](analysis-wrapper)
-4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expect dispatch. [Analysis Pipeline Input](analysis-pipeline-input)
+3. Modfiy the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to committ all changes**. [Analysis Wrapper Section](#analysis-wrapper)
+4. At the pipeline level - modify the necessary files - analysis parameters.json, query, etc. to reflect the wrapper and expect dispatch. [Analysis Pipeline Input](#analysis-pipeline-input)
 5. Run the pipeline
 
 ### Job Dispatcher
