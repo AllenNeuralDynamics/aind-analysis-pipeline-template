@@ -19,7 +19,8 @@
 					"source_id": "data/analysis_parameters",
 					"type": "pipeline",
 					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/"
+					"source_path": "analysis_parameters/",
+					"collect": true
 				},
 				{
 					"id": "NocXuHpDs5ALjZQv",
@@ -36,7 +37,8 @@
 			"capsule": {
 				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
 				"name": "aind-analysis-wrapper",
-				"slug": "7739912"
+				"slug": "7739912",
+				"app_panel": true
 			},
 			"resources": {
 				"cpus": 1,

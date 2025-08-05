@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
-// hash:sha256:5ee527f2e7791cb52a98cfb40af87e30b53feb367d49c1a21c5a392cfa41c269
+// hash:sha256:d525f336741915d95b10713266f27f9a23398fe1522bec91d1e6892dd5f37c9f
 
 nextflow.enable.dsl = 1
 
-analysis_parameters_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
+analysis_parameters_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_parameters", type: 'any')
 analysis_query_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_query", type: 'any')
 analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
 capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4 = channel.create()
@@ -19,7 +19,7 @@ process capsule_aind_analysis_job_dispatch_1 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data/' from analysis_parameters_to_aind_analysis_job_dispatch_1
+	path 'capsule/data' from analysis_parameters_to_aind_analysis_job_dispatch_1.collect()
 	path 'capsule/data' from analysis_query_to_aind_analysis_job_dispatch_2.collect()
 
 	output:
@@ -102,7 +102,7 @@ process capsule_aind_analysis_wrapper_2 {
 	echo "[${task.tag}] running capsule..."
 	cd capsule/code
 	chmod +x run
-	./run
+	./run ${params.capsule_aind_analysis_wrapper_2_args}
 
 	echo "[${task.tag}] completed!"
 	"""
