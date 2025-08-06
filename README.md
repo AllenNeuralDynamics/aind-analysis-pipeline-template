@@ -1,15 +1,16 @@
 # aind-analysis-pipeline-template
 
 This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. The pipeline has 2 capsules:
-[Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper)
+[Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper).
 
 ### Recommended Workflow
 1. Set up analysis collection in document database and S3 bucket. Reach out to data infrastructure team for this
 2. Duplicate the pipeline after S3 bucket and document database collection have been setup
 3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
-4. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
-5. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
-6. Run the pipeline with relevat input arguments specified 
+4. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
+5. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
+6. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
+7. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
 
 ### Job Dispatcher
 The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
@@ -32,7 +33,7 @@ The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule
 See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) readme for **critical** details on environment setup, defining an analysis model, etc.
 
 ### Analysis Pipeline Input 
-**If using a query from the json file: modify the query at the pipeline level in `/data/analysis_query/input_query.json`. In the app panel, set the path to `/data/input_query.json`. If pasting the query, paste the json string representation without leading or trailing quotes, for example `{"subject.subject_id": "774659"}`**.
+**If using a query from the json file: modify the query at the pipeline level in `/data/analysis_query/input_query.json`. In the app panel, set the path to `/data/input_query.json`. If pasting the query, paste the json string representation without leading or trailing quotes, for example `{"subject.subject_id": "774659"}`. If pasting, be sure to remove the connection to the analysis query input json file.**
 
 The main file that needs to be modified is `/data/analysis_parameters/analysis_parameters.json`. Summary of key points is below:
 * There are 2 keys **fixed_parameters**, and **distributed_parameters**.
