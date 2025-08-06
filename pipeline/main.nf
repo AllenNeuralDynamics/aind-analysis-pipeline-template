@@ -1,12 +1,12 @@
 #!/usr/bin/env nextflow
-// hash:sha256:5fb1b6d0a3272df9aae2938eb8ac6b9e4fc3c3ff917b1735c54b8c9c28a4e289
+// hash:sha256:a109f4827fa3b403b99a0e272b021d7905cb20b3866629f4b68043ec34c48607
 
 nextflow.enable.dsl = 1
 
-analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query", type: 'any')
-analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters", type: 'any')
-capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3 = channel.create()
-analysis_parameters_to_aind_analysis_wrapper_4 = channel.fromPath("../data/analysis_parameters", type: 'any')
+analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query/*", type: 'any')
+analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
+analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
+capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
 process capsule_aind_analysis_job_dispatch_3 {
@@ -19,11 +19,11 @@ process capsule_aind_analysis_job_dispatch_3 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data' from analysis_query_to_aind_analysis_job_dispatch_1.collect()
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_job_dispatch_2.collect()
+	path 'capsule/data/' from analysis_query_to_aind_analysis_job_dispatch_1
+	path 'capsule/data/' from analysis_parameters_to_aind_analysis_job_dispatch_2
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4
 
 	script:
 	"""
@@ -70,8 +70,8 @@ process capsule_aind_analysis_wrapper_4 {
 	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
 
 	input:
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3.flatten()
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_4.collect()
+	path 'capsule/data/' from analysis_parameters_to_aind_analysis_wrapper_3
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4.flatten()
 
 	output:
 	path 'capsule/results/*'
