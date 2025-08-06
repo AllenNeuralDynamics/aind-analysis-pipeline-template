@@ -18,7 +18,7 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/370
 | Argument               | Type    | Description                                                                                                                                             |
 |------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--query`  | string | Path to the json file with the docDB query: **`/data/input_query.json`** or paste the representation of the query.
-| `--file_extension`      | string  | The file extension to search for from the bucket returned by the query. Default is empty                                                                                                             |
+| `--file_extension`      | string  | The file extension to search for from the bucket returned by the query (**For example: nwb or zarr**). Default is empty                                                                                                             |
 | `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
 | `--tasks_per_job`    | int  |  The number of tasks per job. Default is 1 task per job. For example, if this is set to 3 and there are 10 tasks, then there will be 4 jobs dispatched.
 | `--max_number_of_tasks_dispatched`  | int  | Maximum number of tasks to be dispatched. Default is 1000.
