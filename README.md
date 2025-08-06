@@ -1,6 +1,6 @@
 # aind-analysis-pipeline-template
 
-This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) is intended to provide a template for facilitating large scale analysis. The pipeline has 2 capsules:
+This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/3390834/tree) is intended to provide a template for facilitating large scale analysis. The pipeline has 2 capsules:
 [Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper).
 
 ### Recommended Workflow
