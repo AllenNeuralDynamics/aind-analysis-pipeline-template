@@ -1,11 +1,11 @@
 #!/usr/bin/env nextflow
-// hash:sha256:a109f4827fa3b403b99a0e272b021d7905cb20b3866629f4b68043ec34c48607
+// hash:sha256:84a16084366ca21283a04f2a1971934a746372c6961c5ce3a6d5ec1761327069
 
 nextflow.enable.dsl = 1
 
 analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query/*", type: 'any')
 analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
-analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
+analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
 capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
@@ -70,7 +70,7 @@ process capsule_aind_analysis_wrapper_4 {
 	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
 
 	input:
-	path 'capsule/data/' from analysis_parameters_to_aind_analysis_wrapper_3
+	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_3.collect()
 	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4.flatten()
 
 	output:

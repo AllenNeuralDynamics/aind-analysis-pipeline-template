@@ -50,7 +50,8 @@
 					"source_id": "data/analysis_parameters",
 					"type": "pipeline",
 					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/"
+					"source_path": "analysis_parameters/",
+					"collect": true
 				},
 				{
 					"id": "dgLNdqbzCWZDFaKh",
