@@ -60,14 +60,6 @@
 			"type": "pipeline"
 		},
 		{
-			"id": "data/analysis_data_asset_ids",
-			"position": {
-				"x": 1110,
-				"y": -75
-			},
-			"type": "pipeline"
-		},
-		{
 			"data": {
 				"capsule_id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
 			},
@@ -87,7 +79,7 @@
 			"type": "pipeline"
 		}
 	],
-	"timestamp": 1753903070454,
+	"timestamp": 1754500517815,
 	"viewport": {
 		"x": -147.5905058630177,
 		"y": 321.0659991724207,
