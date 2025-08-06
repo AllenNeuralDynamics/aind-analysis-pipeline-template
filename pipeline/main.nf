@@ -1,17 +1,17 @@
 #!/usr/bin/env nextflow
-// hash:sha256:d525f336741915d95b10713266f27f9a23398fe1522bec91d1e6892dd5f37c9f
+// hash:sha256:5fb1b6d0a3272df9aae2938eb8ac6b9e4fc3c3ff917b1735c54b8c9c28a4e289
 
 nextflow.enable.dsl = 1
 
-analysis_parameters_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_parameters", type: 'any')
-analysis_query_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_query", type: 'any')
-analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
-capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4 = channel.create()
+analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query", type: 'any')
+analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters", type: 'any')
+capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3 = channel.create()
+analysis_parameters_to_aind_analysis_wrapper_4 = channel.fromPath("../data/analysis_parameters", type: 'any')
 
 // capsule - aind-analysis-job-dispatch
-process capsule_aind_analysis_job_dispatch_1 {
-	tag 'capsule-9303168'
-	container "$REGISTRY_HOST/capsule/a4b6e4fc-65b3-45f3-affc-6a0bf387d187"
+process capsule_aind_analysis_job_dispatch_3 {
+	tag 'capsule-3709532'
+	container "$REGISTRY_HOST/published/d8136da9-6ebd-4881-acac-d054ca35d3ff:v2"
 
 	cpus 1
 	memory '7.5 GB'
@@ -19,18 +19,18 @@ process capsule_aind_analysis_job_dispatch_1 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_job_dispatch_1.collect()
-	path 'capsule/data' from analysis_query_to_aind_analysis_job_dispatch_2.collect()
+	path 'capsule/data' from analysis_query_to_aind_analysis_job_dispatch_1.collect()
+	path 'capsule/data' from analysis_parameters_to_aind_analysis_job_dispatch_2.collect()
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3
 
 	script:
 	"""
 	#!/usr/bin/env bash
 	set -e
 
-	export CO_CAPSULE_ID=a4b6e4fc-65b3-45f3-affc-6a0bf387d187
+	export CO_CAPSULE_ID=d8136da9-6ebd-4881-acac-d054ca35d3ff
 	export CO_CPUS=1
 	export CO_MEMORY=8053063680
 
@@ -41,9 +41,9 @@ process capsule_aind_analysis_job_dispatch_1 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-9303168.git" capsule-repo
+		git clone --filter=tree:0 --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
 	else
-		git clone "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-9303168.git" capsule-repo
+		git clone --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
 	fi
 	mv capsule-repo/code capsule/code
 	rm -rf capsule-repo
@@ -51,16 +51,16 @@ process capsule_aind_analysis_job_dispatch_1 {
 	echo "[${task.tag}] running capsule..."
 	cd capsule/code
 	chmod +x run
-	./run ${params.capsule_aind_analysis_job_dispatch_1_args}
+	./run ${params.capsule_aind_analysis_job_dispatch_3_args}
 
 	echo "[${task.tag}] completed!"
 	"""
 }
 
 // capsule - aind-analysis-wrapper
-process capsule_aind_analysis_wrapper_2 {
-	tag 'capsule-7739912'
-	container "$REGISTRY_HOST/capsule/9f19f5fc-d91e-4d82-8bee-176783e1ca63"
+process capsule_aind_analysis_wrapper_4 {
+	tag 'capsule-0652828'
+	container "$REGISTRY_HOST/published/cc2e0121-97fe-4ad2-b9eb-7fc4767330ea:v1"
 
 	cpus 1
 	memory '7.5 GB'
@@ -70,8 +70,8 @@ process capsule_aind_analysis_wrapper_2 {
 	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
 
 	input:
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_3.collect()
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_1_to_capsule_aind_analysis_wrapper_2_4.flatten()
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3.flatten()
+	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_4.collect()
 
 	output:
 	path 'capsule/results/*'
@@ -81,7 +81,7 @@ process capsule_aind_analysis_wrapper_2 {
 	#!/usr/bin/env bash
 	set -e
 
-	export CO_CAPSULE_ID=9f19f5fc-d91e-4d82-8bee-176783e1ca63
+	export CO_CAPSULE_ID=cc2e0121-97fe-4ad2-b9eb-7fc4767330ea
 	export CO_CPUS=1
 	export CO_MEMORY=8053063680
 
@@ -92,9 +92,9 @@ process capsule_aind_analysis_wrapper_2 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-7739912.git" capsule-repo
+		git clone --filter=tree:0 --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
 	else
-		git clone "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-7739912.git" capsule-repo
+		git clone --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
 	fi
 	mv capsule-repo/code capsule/code
 	rm -rf capsule-repo
@@ -102,7 +102,7 @@ process capsule_aind_analysis_wrapper_2 {
 	echo "[${task.tag}] running capsule..."
 	cd capsule/code
 	chmod +x run
-	./run ${params.capsule_aind_analysis_wrapper_2_args}
+	./run ${params.capsule_aind_analysis_wrapper_4_args}
 
 	echo "[${task.tag}] completed!"
 	"""
