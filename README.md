@@ -16,7 +16,7 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/930
 
 | Argument               | Type    | Description                                                                                                                                             |
 |------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--query`  | string | Path to the json file with the docDB query in **`/data/analysis_query/input_query.json`** or paste the representation of the query.
+| `--query`  | string | Path to the json file with the docDB query: **`/data/input_query.json`** or paste the representation of the query.
 | `--file_extension`      | string  | The file extension to search for from the bucket returned by the query. Default is empty                                                                                                             |
 | `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
 | `--tasks_per_job`    | int  |  The number of tasks per job. Default is 1 task per job. For example, if this is set to 3 and there are 10 tasks, then there will be 4 jobs dispatched.
@@ -32,6 +32,8 @@ The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule
 See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) readme for **critical** details on environment setup, defining an analysis model, etc.
 
 ### Analysis Pipeline Input 
+**If using a query from the json file: modify the query at the pipeline level in `/data/analysis_query/input_query.json`. In the app panel, set the path to `/data/input_query.json`. If pasting the query, paste the json string representation without leading or trailing quotes, for example `{"subject.subject_id": "774659"}`**.
+
 The main file that needs to be modified is `/data/analysis_parameters/analysis_parameters.json`. Summary of key points is below:
 * There are 2 keys **fixed_parameters**, and **distributed_parameters**.
 * **`fixed_parameters`**: A single dictionary following your analysis input schema. Use this when you want to run the same analysis parameters on all data assets (N assets → N jobs).
