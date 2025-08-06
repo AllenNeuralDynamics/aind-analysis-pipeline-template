@@ -13,7 +13,7 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/8624294/tree) 
 7. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
 
 ### Job Dispatcher
-The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/9303168/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
+The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/3709532/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
 
 | Argument               | Type    | Description                                                                                                                                             |
 |------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +28,7 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/930
 See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) readme for more details.
 
 ### Analysis Wrapper
-The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/7739912/tree) is the capsule where analysis is to be executed. **Users must first duplicate this capsule before running the pipeline and be sure to swap out the current one with duplicated one. The current capsule is meant to be an example**. 
+The [analysis wrapper capsule](https://codeocean.allenneuraldynamics.org/capsule/0652828/tree) is the capsule where analysis is to be executed. **Users must first duplicate this capsule before running the pipeline and be sure to swap out the current one with duplicated one. The current capsule is meant to be an example**. 
 
 See the [analysis wrapper](https://github.com/AllenNeuralDynamics/aind-analysis-wrapper) readme for **critical** details on environment setup, defining an analysis model, etc.
 
