@@ -1,2 +1,9 @@
 metadata_version: 1
 name: aind-analysis-pipeline-template
+description: Pipeline with job dispatch and analysis wrapper capsules that serves
+  as template for analysis
+authors:
+- name: Tom Chartrand
+- name: Arjun Sridhar
+- name: Arielle Leon
+- name: Han Hou
