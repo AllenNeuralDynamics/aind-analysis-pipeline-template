@@ -21,7 +21,7 @@ The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/930
 | `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
 | `--tasks_per_job`    | int  |  The number of tasks per job. Default is 1 task per job. For example, if this is set to 3 and there are 10 tasks, then there will be 4 jobs dispatched.
 | `--max_number_of_tasks_dispatched`  | int  | Maximum number of tasks to be dispatched. Default is 1000.
-| `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data/analysis_data_asset_ids` folder called `data_asset_input.csv`, with the column `asset_id`. **Be sure to then replace the connection to the analysis_query and set it to connect to the analysis_data_asset_ids**
+| `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data/analysis_data_asset_ids` folder called `data_asset_input.csv`, with the column `asset_id`. **Be sure to then replace the analysis_query with the analysis_data_asset_ids**. 
 | `--group_by`  | int | Group asset query by a given field in the database schema (for example, by `subject_id`)
 
 See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) readme for more details.
