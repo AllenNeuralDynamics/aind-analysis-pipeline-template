@@ -4,8 +4,8 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/3390834/tree) 
 [Job Dispatcher](#job-dispatcher) and [Analysis Wrapper](#analysis-wrapper).
 
 ### Recommended Workflow
-1. Set up analysis collection in document database and S3 bucket. Reach out to data infrastructure team for this
-2. Duplicate the pipeline after S3 bucket and document database collection have been setup
+1. Request a new collection in the analysis documentDB by filing an issue here: https://github.com/AllenNeuralDynamics/aind-scientific-computing/issues 
+2. Duplicate this pipeline.
 3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
 4. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
 5. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
