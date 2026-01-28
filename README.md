@@ -5,7 +5,7 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/3390834/tree) 
 
 ### Recommended Workflow
 1. Request a new collection in the analysis documentDB by filing an issue here: https://github.com/AllenNeuralDynamics/aind-scientific-computing/issues 
-2. Duplicate this pipeline.
+2. Duplicate this pipeline. Under the `pipeline` folder, modify the `nextflow.config` by replacing the **`aind-analysis-pipeline-template`** in the `process.resourceLabels` field with an apporiate and unique tag for this specific analysis pipeline. This will help monitor and control costs.
 3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
 4. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
 5. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
