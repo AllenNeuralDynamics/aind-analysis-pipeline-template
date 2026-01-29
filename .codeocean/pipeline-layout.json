@@ -14,20 +14,9 @@
 		},
 		{
 			"id": "xy-edge__capsule_aind_analysis_job_dispatch_3-capsule_aind_analysis_wrapper_4",
-			"selected": true,
+			"selected": false,
 			"source": "capsule_aind_analysis_job_dispatch_3",
 			"target": "capsule_aind_analysis_wrapper_4"
-		},
-		{
-			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_wrapper_4",
-			"selected": false,
-			"source": "data/analysis_parameters",
-			"target": "capsule_aind_analysis_wrapper_4"
-		},
-		{
-			"id": "xy-edge__capsule_aind_analysis_wrapper_4-results",
-			"source": "capsule_aind_analysis_wrapper_4",
-			"target": "results"
 		}
 	],
 	"nodes": [
@@ -82,10 +71,10 @@
 			"type": "capsule"
 		}
 	],
-	"timestamp": 1754504929297,
+	"timestamp": 1769679035216,
 	"viewport": {
-		"x": -92.4983463000408,
-		"y": 304.6677948457728,
-		"zoom": 0.8373203720854804
+		"x": -129.80952297964222,
+		"y": 144.30875155671757,
+		"zoom": 0.5118151122927177
 	}
 }

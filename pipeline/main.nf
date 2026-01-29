@@ -1,12 +1,11 @@
 #!/usr/bin/env nextflow
-// hash:sha256:84a16084366ca21283a04f2a1971934a746372c6961c5ce3a6d5ec1761327069
+// hash:sha256:cd4c29e6e4aca7130bc1b9e1005b4a97e487326bdc1b17fff40bf0af39cb05af
 
 nextflow.enable.dsl = 1
 
 analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query/*", type: 'any')
 analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
-analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
-capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4 = channel.create()
+capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
 process capsule_aind_analysis_job_dispatch_3 {
@@ -23,7 +22,7 @@ process capsule_aind_analysis_job_dispatch_3 {
 	path 'capsule/data/' from analysis_parameters_to_aind_analysis_job_dispatch_2
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3
 
 	script:
 	"""
@@ -41,11 +40,11 @@ process capsule_aind_analysis_job_dispatch_3 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
+		git -c credential.helper= clone --filter=tree:0 --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
 	else
-		git clone --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
+		git -c credential.helper= clone --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
 	fi
-	mv capsule-repo/code capsule/code
+	mv capsule-repo/code capsule/code && ln -s \$PWD/capsule/code /code
 	rm -rf capsule-repo
 
 	echo "[${task.tag}] running capsule..."
@@ -65,16 +64,8 @@ process capsule_aind_analysis_wrapper_4 {
 	cpus 1
 	memory '7.5 GB'
 
-	cache 'deep'
-
-	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
-
 	input:
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_3.collect()
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4.flatten()
-
-	output:
-	path 'capsule/results/*'
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3.flatten()
 
 	script:
 	"""
@@ -92,11 +83,11 @@ process capsule_aind_analysis_wrapper_4 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
+		git -c credential.helper= clone --filter=tree:0 --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
 	else
-		git clone --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
+		git -c credential.helper= clone --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
 	fi
-	mv capsule-repo/code capsule/code
+	mv capsule-repo/code capsule/code && ln -s \$PWD/capsule/code /code
 	rm -rf capsule-repo
 
 	echo "[${task.tag}] running capsule..."

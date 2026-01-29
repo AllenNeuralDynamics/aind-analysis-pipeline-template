@@ -46,14 +46,6 @@
 			},
 			"inputs": [
 				{
-					"id": "JtpPWS96HWuriSA2",
-					"source_id": "data/analysis_parameters",
-					"type": "pipeline",
-					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/",
-					"collect": true
-				},
-				{
 					"id": "dgLNdqbzCWZDFaKh",
 					"source_id": "capsule_aind_analysis_job_dispatch_3",
 					"type": "capsule",
@@ -61,10 +53,7 @@
 					"target_path": "job_dict",
 					"flatten": true
 				}
-			],
-			"results": {
-				"id": "cc2e0121-97fe-4ad2-b9eb-7fc4767330ea"
-			}
+			]
 		}
 	]
 }
