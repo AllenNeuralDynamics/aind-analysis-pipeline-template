@@ -48,19 +48,19 @@
 		},
 		{
 			"data": {
-				"capsule_id": "d8136da9-6ebd-4881-acac-d054ca35d3ff"
+				"capsule_id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187"
 			},
 			"id": "capsule_aind_analysis_job_dispatch_3",
 			"position": {
 				"x": 936.9140882791396,
 				"y": 107.4857402260984
 			},
-			"selected": false,
+			"selected": true,
 			"type": "capsule"
 		},
 		{
 			"data": {
-				"capsule_id": "cc2e0121-97fe-4ad2-b9eb-7fc4767330ea"
+				"capsule_id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
 			},
 			"id": "capsule_aind_analysis_wrapper_4",
 			"position": {
@@ -71,7 +71,7 @@
 			"type": "capsule"
 		}
 	],
-	"timestamp": 1769679035216,
+	"timestamp": 1769679077644,
 	"viewport": {
 		"x": -129.80952297964222,
 		"y": 144.30875155671757,
