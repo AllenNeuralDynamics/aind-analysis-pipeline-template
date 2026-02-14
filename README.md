@@ -7,23 +7,18 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/3390834/tree) 
 1. Request a new collection in the analysis documentDB by filing an issue here: https://github.com/AllenNeuralDynamics/aind-scientific-computing/issues 
 2. Duplicate this pipeline. Under the `pipeline` folder, modify the `nextflow.config` by replacing the **`aind-analysis-pipeline-template`** in the `process.resourceLabels` field with an apporiate and unique tag for this specific analysis pipeline. This will help monitor and control costs.
 3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
-4. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
-5. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
-6. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
-7. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
+4. Attach the necessary pipeline settings credentials by clicking on the pipleine settings widget at the far right. See screenshot below:
+   <img width="1639" height="804" alt="image" src="https://github.com/user-attachments/assets/087b7ef3-6e85-49de-998b-68c2bc53dec2" />
+
+5. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
+6. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
+7. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
+8. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
 
 ### Job Dispatcher
-The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/3709532/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments in app panel are below:
+The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/3709532/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments can be found in the app panel. See sample screenshot below:
 
-| Argument               | Type    | Description                                                                                                                                             |
-|------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `--query`  | string | Path to the json file with the docDB query: **`/data/input_query.json`** or paste the representation of the query.
-| `--file_extension`      | string  | The file extension to search for from the bucket returned by the query (**For example: nwb or zarr**). Default is empty                                                                                                             |
-| `--split_files`   | int  | Either group the files into one list if multiple files are returned for the file extension or split into single input per file. Default is to split
-| `--tasks_per_job`    | int  |  The number of tasks per job. Default is 1 task per job. For example, if this is set to 3 and there are 10 tasks, then there will be 4 jobs dispatched.
-| `--max_number_of_tasks_dispatched`  | int  | Maximum number of tasks to be dispatched. Default is 1000.
-| `--use_data_asset_csv`  | int | Whether or not to use the data asset ids in the csv provided. Default is 0. If 1, there MUST be a csv in the `/data/analysis_data_asset_ids` folder called `data_asset_input.csv`, with the column `asset_id`. **Be sure to then replace the analysis_query with the analysis_data_asset_ids**. 
-| `--group_by`  | int | Group asset query by a given field in the database schema (for example, by `subject_id`)
+<img width="390" height="813" alt="image" src="https://github.com/user-attachments/assets/a6f2841a-961e-41cb-bbea-e28ab5eb2813" />
 
 See [job_dispatch](https://github.com/AllenNeuralDynamics/aind-analysis-job-dispatch) readme for more details.
 
