@@ -6,14 +6,15 @@ This [pipeline](https://codeocean.allenneuraldynamics.org/capsule/3390834/tree) 
 ### Recommended Workflow
 1. Request a new collection in the analysis documentDB by filing an issue here: https://github.com/AllenNeuralDynamics/aind-scientific-computing/issues 
 2. Duplicate this pipeline. Under the `pipeline` folder, modify the `nextflow.config` by replacing the **`aind-analysis-pipeline-template`** in the `process.resourceLabels` field with an apporiate and unique tag for this specific analysis pipeline. This will help monitor and control costs.
-3. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
-4. Attach the necessary pipeline settings credentials by clicking on the pipleine settings widget at the far right. See screenshot below:
+3. In addition to step 2, modify the `nextflow.config` by updating the necessary values: `ANALYSIS_BUCKET`, `CODEOCEAN_EMAIL`, and `DOCDB_COLLECTION`
+4. From the duplicated pipeline, duplicate the **`analysis_wrapper`** capsule. **Replace the example wrapper capsule with the duplicated one**
+5. Attach the necessary pipeline settings credentials by clicking on the pipleine settings widget at the far right. See screenshot below:
    <img width="1639" height="804" alt="image" src="https://github.com/user-attachments/assets/087b7ef3-6e85-49de-998b-68c2bc53dec2" />
 
-5. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
-6. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
-7. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
-8. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
+6. Figure out docDB query or input data assets csv that are desired. Test with dispatch capsule if needed (should not need to duplicate unless have to manually implement grouping, just use app panel). See job dispatcher section.
+7. Modify the duplicated analysis wrapper capsule - follow instructions in the readme for the wrapper. **Be sure to commit all changes**. [Analysis Wrapper Section](#analysis-wrapper)
+8. At the pipeline level - modify the necessary input - analysis parameters.json, query, etc. to reflect the wrapper and expected dispatch output. [Analysis Pipeline Input](#analysis-pipeline-input)
+9. Run the pipeline with relevant input arguments specified. When ready, set the dry run argument in app panel to 0 after testing to write results to S3 and docDB.
 
 ### Job Dispatcher
 The [job dispatch capsule](https://codeocean.allenneuraldynamics.org/capsule/3709532/tree). This capsule fetches information about data assets that the user wants to run analysis on. Input arguments can be found in the app panel. See sample screenshot below:
