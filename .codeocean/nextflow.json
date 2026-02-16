@@ -4,10 +4,11 @@
 		{
 			"name": "capsule_aind_analysis_job_dispatch_3",
 			"capsule": {
-				"id": "d8136da9-6ebd-4881-acac-d054ca35d3ff",
+				"id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187",
 				"name": "aind-analysis-job-dispatch",
-				"slug": "3709532",
-				"version": 2,
+				"slug": "9303168",
+				"commit": "c47bb25b532e2cd7dda28a9135713f70431c1df4",
+				"image_tag": "3c8b00bced1ceb20d002487251fc43f7",
 				"app_panel": true
 			},
 			"resources": {
@@ -17,27 +18,22 @@
 			"inputs": [
 				{
 					"id": "7uzXj85DbsGEiIho",
-					"source_id": "data/analysis_query",
+					"source_id": "data/input_data",
 					"type": "pipeline",
-					"name": "analysis_query",
-					"source_path": "analysis_query/"
-				},
-				{
-					"id": "ukCf46PeeSQdpErb",
-					"source_id": "data/analysis_parameters",
-					"type": "pipeline",
-					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/"
+					"name": "input_data",
+					"source_path": "input_data/",
+					"target_path": "input_data/"
 				}
 			]
 		},
 		{
 			"name": "capsule_aind_analysis_wrapper_4",
 			"capsule": {
-				"id": "cc2e0121-97fe-4ad2-b9eb-7fc4767330ea",
+				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
 				"name": "aind-analysis-wrapper",
-				"slug": "0652828",
-				"version": 1,
+				"slug": "7739912",
+				"commit": "2bb5d32d6a83d643d6deccf05f70ab12f5798291",
+				"image_tag": "0ec7ca43a1c2314b100821d6da4c16c2",
 				"app_panel": true
 			},
 			"resources": {
@@ -45,14 +41,6 @@
 				"memory": 8
 			},
 			"inputs": [
-				{
-					"id": "JtpPWS96HWuriSA2",
-					"source_id": "data/analysis_parameters",
-					"type": "pipeline",
-					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/",
-					"collect": true
-				},
 				{
 					"id": "dgLNdqbzCWZDFaKh",
 					"source_id": "capsule_aind_analysis_job_dispatch_3",
@@ -63,7 +51,7 @@
 				}
 			],
 			"results": {
-				"id": "cc2e0121-97fe-4ad2-b9eb-7fc4767330ea"
+				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
 			}
 		}
 	]

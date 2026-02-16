@@ -1,17 +1,15 @@
 #!/usr/bin/env nextflow
-// hash:sha256:84a16084366ca21283a04f2a1971934a746372c6961c5ce3a6d5ec1761327069
+// hash:sha256:65dd436c29d52cd1027cba8ae4bc9e6b38cdeb5f3522e0d3ebfd6272b2ecb6aa
 
 nextflow.enable.dsl = 1
 
-analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query/*", type: 'any')
-analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
-analysis_parameters_to_aind_analysis_wrapper_3 = channel.fromPath("../data/analysis_parameters", type: 'any')
-capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4 = channel.create()
+input_data_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/input_data/*", type: 'any')
+capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
 process capsule_aind_analysis_job_dispatch_3 {
-	tag 'capsule-3709532'
-	container "$REGISTRY_HOST/published/d8136da9-6ebd-4881-acac-d054ca35d3ff:v2"
+	tag 'capsule-9303168'
+	container "$REGISTRY_HOST/capsule/a4b6e4fc-65b3-45f3-affc-6a0bf387d187:3c8b00bced1ceb20d002487251fc43f7"
 
 	cpus 1
 	memory '7.5 GB'
@@ -19,18 +17,17 @@ process capsule_aind_analysis_job_dispatch_3 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data/' from analysis_query_to_aind_analysis_job_dispatch_1
-	path 'capsule/data/' from analysis_parameters_to_aind_analysis_job_dispatch_2
+	path 'capsule/data/input_data/' from input_data_to_aind_analysis_job_dispatch_1
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2
 
 	script:
 	"""
 	#!/usr/bin/env bash
 	set -e
 
-	export CO_CAPSULE_ID=d8136da9-6ebd-4881-acac-d054ca35d3ff
+	export CO_CAPSULE_ID=a4b6e4fc-65b3-45f3-affc-6a0bf387d187
 	export CO_CPUS=1
 	export CO_MEMORY=8053063680
 
@@ -41,11 +38,12 @@ process capsule_aind_analysis_job_dispatch_3 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
+		git -c credential.helper= clone --filter=tree:0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-9303168.git" capsule-repo
 	else
-		git clone --branch v2.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-3709532.git" capsule-repo
+		git -c credential.helper= clone "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-9303168.git" capsule-repo
 	fi
-	mv capsule-repo/code capsule/code
+	git -C capsule-repo checkout c47bb25b532e2cd7dda28a9135713f70431c1df4 --quiet
+	mv capsule-repo/code capsule/code && ln -s \$PWD/capsule/code /code
 	rm -rf capsule-repo
 
 	echo "[${task.tag}] running capsule..."
@@ -59,19 +57,16 @@ process capsule_aind_analysis_job_dispatch_3 {
 
 // capsule - aind-analysis-wrapper
 process capsule_aind_analysis_wrapper_4 {
-	tag 'capsule-0652828'
-	container "$REGISTRY_HOST/published/cc2e0121-97fe-4ad2-b9eb-7fc4767330ea:v1"
+	tag 'capsule-7739912'
+	container "$REGISTRY_HOST/capsule/9f19f5fc-d91e-4d82-8bee-176783e1ca63:0ec7ca43a1c2314b100821d6da4c16c2"
 
 	cpus 1
 	memory '7.5 GB'
 
-	cache 'deep'
-
 	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
 
 	input:
-	path 'capsule/data' from analysis_parameters_to_aind_analysis_wrapper_3.collect()
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_4.flatten()
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2.flatten()
 
 	output:
 	path 'capsule/results/*'
@@ -81,7 +76,7 @@ process capsule_aind_analysis_wrapper_4 {
 	#!/usr/bin/env bash
 	set -e
 
-	export CO_CAPSULE_ID=cc2e0121-97fe-4ad2-b9eb-7fc4767330ea
+	export CO_CAPSULE_ID=9f19f5fc-d91e-4d82-8bee-176783e1ca63
 	export CO_CPUS=1
 	export CO_MEMORY=8053063680
 
@@ -92,11 +87,12 @@ process capsule_aind_analysis_wrapper_4 {
 
 	echo "[${task.tag}] cloning git repo..."
 	if [[ "\$(printf '%s\n' "2.20.0" "\$(git version | awk '{print \$3}')" | sort -V | head -n1)" = "2.20.0" ]]; then
-		git clone --filter=tree:0 --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
+		git -c credential.helper= clone --filter=tree:0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-7739912.git" capsule-repo
 	else
-		git clone --branch v1.0 "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-0652828.git" capsule-repo
+		git -c credential.helper= clone "https://\$GIT_ACCESS_TOKEN@\$GIT_HOST/capsule-7739912.git" capsule-repo
 	fi
-	mv capsule-repo/code capsule/code
+	git -C capsule-repo checkout 2bb5d32d6a83d643d6deccf05f70ab12f5798291 --quiet
+	mv capsule-repo/code capsule/code && ln -s \$PWD/capsule/code /code
 	rm -rf capsule-repo
 
 	echo "[${task.tag}] running capsule..."
