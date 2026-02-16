@@ -7,6 +7,8 @@
 				"id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187",
 				"name": "aind-analysis-job-dispatch",
 				"slug": "9303168",
+				"commit": "c47bb25b532e2cd7dda28a9135713f70431c1df4",
+				"image_tag": "3c8b00bced1ceb20d002487251fc43f7",
 				"app_panel": true
 			},
 			"resources": {
@@ -30,6 +32,8 @@
 				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
 				"name": "aind-analysis-wrapper",
 				"slug": "7739912",
+				"commit": "2bb5d32d6a83d643d6deccf05f70ab12f5798291",
+				"image_tag": "0ec7ca43a1c2314b100821d6da4c16c2",
 				"app_panel": true
 			},
 			"resources": {
