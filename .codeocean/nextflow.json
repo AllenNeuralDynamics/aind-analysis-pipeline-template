@@ -16,17 +16,11 @@
 			"inputs": [
 				{
 					"id": "7uzXj85DbsGEiIho",
-					"source_id": "data/analysis_query",
+					"source_id": "data/input_data",
 					"type": "pipeline",
-					"name": "analysis_query",
-					"source_path": "analysis_query/"
-				},
-				{
-					"id": "ukCf46PeeSQdpErb",
-					"source_id": "data/analysis_parameters",
-					"type": "pipeline",
-					"name": "analysis_parameters",
-					"source_path": "analysis_parameters/"
+					"name": "input_data",
+					"source_path": "input_data/",
+					"target_path": "input_data/"
 				}
 			]
 		},

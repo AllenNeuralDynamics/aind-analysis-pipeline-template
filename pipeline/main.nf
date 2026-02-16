@@ -1,11 +1,10 @@
 #!/usr/bin/env nextflow
-// hash:sha256:a6d15d1b182ca91111ba0e3e57be813c5ba1d1250aa50aad44d5247a999638e9
+// hash:sha256:158709c8a0d6b7ed442508a04c07a4760dc135753407ce6bd6686176ec8cfa6d
 
 nextflow.enable.dsl = 1
 
-analysis_query_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/analysis_query/*", type: 'any')
-analysis_parameters_to_aind_analysis_job_dispatch_2 = channel.fromPath("../data/analysis_parameters/*", type: 'any')
-capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3 = channel.create()
+input_data_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/input_data/*", type: 'any')
+capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
 process capsule_aind_analysis_job_dispatch_3 {
@@ -18,11 +17,10 @@ process capsule_aind_analysis_job_dispatch_3 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data/' from analysis_query_to_aind_analysis_job_dispatch_1
-	path 'capsule/data/' from analysis_parameters_to_aind_analysis_job_dispatch_2
+	path 'capsule/data/input_data/' from input_data_to_aind_analysis_job_dispatch_1
 
 	output:
-	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3
+	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2
 
 	script:
 	"""
@@ -65,7 +63,7 @@ process capsule_aind_analysis_wrapper_4 {
 	memory '7.5 GB'
 
 	input:
-	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_3.flatten()
+	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2.flatten()
 
 	script:
 	"""

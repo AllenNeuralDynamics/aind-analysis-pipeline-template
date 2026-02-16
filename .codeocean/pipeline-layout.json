@@ -1,15 +1,9 @@
 {
 	"edges": [
 		{
-			"id": "xy-edge__data/analysis_parameters-capsule_aind_analysis_job_dispatch_3",
+			"id": "xy-edge__data/input_data-capsule_aind_analysis_job_dispatch_3",
 			"selected": false,
-			"source": "data/analysis_parameters",
-			"target": "capsule_aind_analysis_job_dispatch_3"
-		},
-		{
-			"id": "xy-edge__data/analysis_query-capsule_aind_analysis_job_dispatch_3",
-			"selected": false,
-			"source": "data/analysis_query",
+			"source": "data/input_data",
 			"target": "capsule_aind_analysis_job_dispatch_3"
 		},
 		{
@@ -30,16 +24,7 @@
 			"type": "results"
 		},
 		{
-			"id": "data/analysis_parameters",
-			"position": {
-				"x": 315,
-				"y": -170.33333333333334
-			},
-			"selected": false,
-			"type": "pipeline"
-		},
-		{
-			"id": "data/analysis_query",
+			"id": "data/input_data",
 			"position": {
 				"x": 885,
 				"y": -195
@@ -71,7 +56,7 @@
 			"type": "capsule"
 		}
 	],
-	"timestamp": 1769679077644,
+	"timestamp": 1771236286483,
 	"viewport": {
 		"x": -129.80952297964222,
 		"y": 144.30875155671757,
