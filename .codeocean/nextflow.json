@@ -45,7 +45,10 @@
 					"target_path": "job_dict",
 					"flatten": true
 				}
-			]
+			],
+			"results": {
+				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
+			}
 		}
 	]
 }

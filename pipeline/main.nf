@@ -1,5 +1,5 @@
 #!/usr/bin/env nextflow
-// hash:sha256:158709c8a0d6b7ed442508a04c07a4760dc135753407ce6bd6686176ec8cfa6d
+// hash:sha256:36b50a8516c6b858d085d9f9cf5d7bdb8b4cebb3d8c308cbf06e2af9161d3b99
 
 nextflow.enable.dsl = 1
 
@@ -62,8 +62,13 @@ process capsule_aind_analysis_wrapper_4 {
 	cpus 1
 	memory '7.5 GB'
 
+	publishDir "$RESULTS_PATH", saveAs: { filename -> new File(filename).getName() }
+
 	input:
 	path 'capsule/data/job_dict' from capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2.flatten()
+
+	output:
+	path 'capsule/results/*'
 
 	script:
 	"""

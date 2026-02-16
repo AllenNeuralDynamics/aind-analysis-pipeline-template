@@ -11,6 +11,11 @@
 			"selected": false,
 			"source": "capsule_aind_analysis_job_dispatch_3",
 			"target": "capsule_aind_analysis_wrapper_4"
+		},
+		{
+			"id": "xy-edge__capsule_aind_analysis_wrapper_4-results",
+			"source": "capsule_aind_analysis_wrapper_4",
+			"target": "results"
 		}
 	],
 	"nodes": [
@@ -37,10 +42,10 @@
 			},
 			"id": "capsule_aind_analysis_job_dispatch_3",
 			"position": {
-				"x": 936.9140882791396,
-				"y": 107.4857402260984
+				"x": 856.8070359173264,
+				"y": 41.05550168215582
 			},
-			"selected": true,
+			"selected": false,
 			"type": "capsule"
 		},
 		{
@@ -49,14 +54,14 @@
 			},
 			"id": "capsule_aind_analysis_wrapper_4",
 			"position": {
-				"x": 861.3883702464813,
-				"y": 522.5657462788548
+				"x": 863.3422007918914,
+				"y": 325.22886119243697
 			},
-			"selected": false,
+			"selected": true,
 			"type": "capsule"
 		}
 	],
-	"timestamp": 1771236286483,
+	"timestamp": 1771236448856,
 	"viewport": {
 		"x": -129.80952297964222,
 		"y": 144.30875155671757,
