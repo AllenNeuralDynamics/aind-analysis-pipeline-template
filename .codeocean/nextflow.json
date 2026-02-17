@@ -22,7 +22,8 @@
 					"type": "pipeline",
 					"name": "input_data",
 					"source_path": "input_data/",
-					"target_path": "input_data/"
+					"target_path": "input_data/",
+					"collect": true
 				}
 			]
 		},
@@ -30,7 +31,7 @@
 			"name": "capsule_aind_analysis_wrapper_4",
 			"capsule": {
 				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
-				"name": "aind-analysis-wrapper",
+				"name": "aind-analysis-wrapper-template",
 				"slug": "7739912",
 				"commit": "2bb5d32d6a83d643d6deccf05f70ab12f5798291",
 				"image_tag": "0ec7ca43a1c2314b100821d6da4c16c2",

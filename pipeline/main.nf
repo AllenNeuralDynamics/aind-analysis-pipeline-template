@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
-// hash:sha256:65dd436c29d52cd1027cba8ae4bc9e6b38cdeb5f3522e0d3ebfd6272b2ecb6aa
+// hash:sha256:36a8eeb35527a48e88333131e7ac46cb602d48721091db2bcc52c6f032aac94a
 
 nextflow.enable.dsl = 1
 
-input_data_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/input_data/*", type: 'any')
+input_data_to_aind_analysis_job_dispatch_1 = channel.fromPath("../data/input_data", type: 'any')
 capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2 = channel.create()
 
 // capsule - aind-analysis-job-dispatch
@@ -17,7 +17,7 @@ process capsule_aind_analysis_job_dispatch_3 {
 	cache 'deep'
 
 	input:
-	path 'capsule/data/input_data/' from input_data_to_aind_analysis_job_dispatch_1
+	path 'capsule/data/input_data' from input_data_to_aind_analysis_job_dispatch_1.collect()
 
 	output:
 	path 'capsule/results/*' into capsule_aind_analysis_job_dispatch_3_to_capsule_aind_analysis_wrapper_4_2
@@ -55,7 +55,7 @@ process capsule_aind_analysis_job_dispatch_3 {
 	"""
 }
 
-// capsule - aind-analysis-wrapper
+// capsule - aind-analysis-wrapper-template
 process capsule_aind_analysis_wrapper_4 {
 	tag 'capsule-7739912'
 	container "$REGISTRY_HOST/capsule/9f19f5fc-d91e-4d82-8bee-176783e1ca63:0ec7ca43a1c2314b100821d6da4c16c2"
