@@ -1,20 +1,18 @@
 {
 	"edges": [
 		{
-			"id": "xy-edge__data/input_data-capsule_aind_analysis_job_dispatch_3",
-			"selected": false,
-			"source": "data/input_data",
+			"id": "xy-edge__data/input_files-capsule_aind_analysis_job_dispatch_3",
+			"source": "data/input_files",
 			"target": "capsule_aind_analysis_job_dispatch_3"
 		},
 		{
-			"id": "xy-edge__capsule_aind_analysis_job_dispatch_3-capsule_aind_analysis_wrapper_4",
-			"selected": false,
+			"id": "xy-edge__capsule_aind_analysis_job_dispatch_3-capsule_aind_analysis_wrapper_template_4",
 			"source": "capsule_aind_analysis_job_dispatch_3",
-			"target": "capsule_aind_analysis_wrapper_4"
+			"target": "capsule_aind_analysis_wrapper_template_4"
 		},
 		{
-			"id": "xy-edge__capsule_aind_analysis_wrapper_4-results",
-			"source": "capsule_aind_analysis_wrapper_4",
+			"id": "xy-edge__capsule_aind_analysis_wrapper_template_4-results",
+			"source": "capsule_aind_analysis_wrapper_template_4",
 			"target": "results"
 		}
 	],
@@ -29,7 +27,7 @@
 			"type": "results"
 		},
 		{
-			"id": "data/input_data",
+			"id": "data/input_files",
 			"position": {
 				"x": 885,
 				"y": -195
@@ -38,21 +36,21 @@
 		},
 		{
 			"data": {
-				"capsule_id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187"
+				"capsule_id": "d8136da9-6ebd-4881-acac-d054ca35d3ff"
 			},
 			"id": "capsule_aind_analysis_job_dispatch_3",
 			"position": {
 				"x": 856.8070359173264,
 				"y": 41.05550168215582
 			},
-			"selected": false,
+			"selected": true,
 			"type": "capsule"
 		},
 		{
 			"data": {
-				"capsule_id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
+				"capsule_id": "cffff209-3aa7-43b1-80fc-96df26466e76"
 			},
-			"id": "capsule_aind_analysis_wrapper_4",
+			"id": "capsule_aind_analysis_wrapper_template_4",
 			"position": {
 				"x": 863.3422007918914,
 				"y": 325.22886119243697
@@ -61,10 +59,5 @@
 			"type": "capsule"
 		}
 	],
-	"timestamp": 1771236448856,
-	"viewport": {
-		"x": -129.80952297964222,
-		"y": 144.30875155671757,
-		"zoom": 0.5118151122927177
-	}
+	"timestamp": 1772751246206
 }

@@ -2,6 +2,6 @@
 	"version": 1,
 	"processes": [
 		"capsule_aind_analysis_job_dispatch_3",
-		"capsule_aind_analysis_wrapper_4"
+		"capsule_aind_analysis_wrapper_template_4"
 	]
 }

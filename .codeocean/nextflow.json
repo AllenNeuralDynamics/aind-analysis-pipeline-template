@@ -1,14 +1,13 @@
 {
-	"version": 1,
+	"version": 2,
 	"processes": [
 		{
 			"name": "capsule_aind_analysis_job_dispatch_3",
 			"capsule": {
-				"id": "a4b6e4fc-65b3-45f3-affc-6a0bf387d187",
+				"id": "d8136da9-6ebd-4881-acac-d054ca35d3ff",
 				"name": "aind-analysis-job-dispatch",
-				"slug": "9303168",
-				"commit": "c47bb25b532e2cd7dda28a9135713f70431c1df4",
-				"image_tag": "3c8b00bced1ceb20d002487251fc43f7",
+				"slug": "3709532",
+				"version": 3,
 				"app_panel": true
 			},
 			"resources": {
@@ -18,23 +17,23 @@
 			"inputs": [
 				{
 					"id": "7uzXj85DbsGEiIho",
-					"source_id": "data/input_data",
+					"source_id": "data/input_files",
 					"type": "pipeline",
-					"name": "input_data",
-					"source_path": "input_data/",
-					"target_path": "input_data/",
+					"name": "input_files",
+					"source_path": "input_files/",
+					"target_path": "input_files/",
 					"collect": true
 				}
 			]
 		},
 		{
-			"name": "capsule_aind_analysis_wrapper_4",
+			"name": "capsule_aind_analysis_wrapper_template_4",
 			"capsule": {
-				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63",
+				"id": "cffff209-3aa7-43b1-80fc-96df26466e76",
 				"name": "aind-analysis-wrapper-template",
-				"slug": "7739912",
-				"commit": "2bb5d32d6a83d643d6deccf05f70ab12f5798291",
-				"image_tag": "0ec7ca43a1c2314b100821d6da4c16c2",
+				"slug": "9982875",
+				"commit": "a0615bf9c141502825b8d5c08943ee7eecb712f1",
+				"image_tag": "f71a8948d52f7b7cc5bf1649d2c797b1",
 				"app_panel": true
 			},
 			"resources": {
@@ -52,7 +51,7 @@
 				}
 			],
 			"results": {
-				"id": "9f19f5fc-d91e-4d82-8bee-176783e1ca63"
+				"id": "cffff209-3aa7-43b1-80fc-96df26466e76"
 			}
 		}
 	]
