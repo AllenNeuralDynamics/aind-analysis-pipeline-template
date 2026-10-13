@@ -7,7 +7,7 @@
 				"id": "d8136da9-6ebd-4881-acac-d054ca35d3ff",
 				"name": "aind-analysis-job-dispatch",
 				"slug": "3709532",
-				"version": 3,
+				"version": 5,
 				"app_panel": true
 			},
 			"resources": {
@@ -32,8 +32,8 @@
 				"id": "cffff209-3aa7-43b1-80fc-96df26466e76",
 				"name": "aind-analysis-wrapper-template",
 				"slug": "9982875",
-				"commit": "a0615bf9c141502825b8d5c08943ee7eecb712f1",
-				"image_tag": "f71a8948d52f7b7cc5bf1649d2c797b1",
+				"commit": "b8ff47a31e4101ea4ee5c976cbd9c3674b4f21a9",
+				"image_tag": "0a740f22fbc9954e63a84778e185c71c",
 				"app_panel": true
 			},
 			"resources": {
@@ -51,7 +51,8 @@
 				}
 			],
 			"results": {
-				"id": "cffff209-3aa7-43b1-80fc-96df26466e76"
+				"id": "cffff209-3aa7-43b1-80fc-96df26466e76",
+				"sequence_folders": true
 			}
 		}
 	]
